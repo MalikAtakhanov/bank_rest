@@ -2,8 +2,6 @@ package com.example.bankcards.controller;
 
 import com.example.bankcards.dto.AuthRequestDto;
 import com.example.bankcards.dto.AuthResponseDto;
-import com.example.bankcards.entity.User;
-import com.example.bankcards.entity.enums.Role;
 import com.example.bankcards.repository.UserRepository;
 import com.example.bankcards.service.AuthService;
 import jakarta.validation.Valid;

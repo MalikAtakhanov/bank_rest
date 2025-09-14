@@ -1,6 +1,5 @@
 package com.example.bankcards.dto;
 
-import com.example.bankcards.entity.enums.Role;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
