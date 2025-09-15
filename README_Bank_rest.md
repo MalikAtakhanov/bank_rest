@@ -4,12 +4,9 @@ REST API для банковских операций. Проект предос
 
 ## Основные возможности
 
-- Создание и управление банковскими счетами
-- Переводы между счетами
-- История транзакций
+- Создание и управление банковскими картами
+- Переводы между картами
 - Управление данными клиентов
-- Проверка баланса
-- Депозиты и снятие средств
 
 ## Технологии
 
@@ -22,7 +19,7 @@ REST API для банковских операций. Проект предос
 
 ## Требования
 
-- Java 11 или выше
+- Java 17 или выше
 - PostgreSQL
 - Maven 3.6+
 
@@ -56,46 +53,47 @@ CREATE DATABASE bank_db;
 
 ## API Endpoints
 
-### Счета
-- GET /api/accounts - список всех счетов
-- GET /api/accounts/{id} - информация о счете
-- POST /api/accounts - создать новый счет
-- DELETE /api/accounts/{id} - закрыть счет
+### Авторизация
+- POST /api/auth/login
+
+### Пользователи
+- GET /api/admin/users - список всех пользователей
+- POST /api/admin/users - добавление нового пользователя
+- DELETE /api/admin/users/{id} - удалить пользователя
 
 ### Транзакции
-- POST /api/transactions/transfer - перевод между счетами
-- POST /api/transactions/deposit - пополнение счета
-- POST /api/transactions/withdraw - снятие средств
-- GET /api/transactions/history/{accountId} - история операций
-
-### Клиенты
-- GET /api/customers - список клиентов
-- POST /api/customers - регистрация клиента
-- GET /api/customers/{id} - данные клиента
+- POST /api/cards/transfer - перевод между своими картами
+### Карты
+- POST /api/cards - создание новой карты
+- GET /api/cards/my - список всех карт пользователя
+- GET /api/cards/admin/all - список всех карт
+- DELETE /api/cards/{id} - удаление карты по ID
+- PATCH /api/cards/{id}/block - блокирование карты
+- PATCH /api/cards/{id}/activate - активация карты
 
 ## Структура проекта
 ```bash
 src/
 ├── main/
 │   ├── java/
-│   │   └── com/bank/
+│   │   └── com/example/bankcards
+│   │       ├── config/
 │   │       ├── controller/
-│   │       ├── service/
-│   │       ├── repository/
-│   │       ├── model/
 │   │       ├── dto/
-│   │       └── config/
+│   │       ├── entity/enums
+│   │       ├── exception/
+│   │       ├── repository/
+│   │       ├── security/
+│   │       ├── service/
+│   │       └── util/
 │   └── resources/
-│       └── application.properties
+│       ├── db/
+│       │   └── migration/
+│       └── application.yml
 └── test/
 ```
 
-## Тестирование
 
-Запуск тестов:
-```
-mvn test
-```
 ## Безопасность
 
 API использует JWT токены для аутентификации. После успешного входа клиент получает токен, который необходимо передавать в заголовке Authorization для доступа к защищенным endpoints.
